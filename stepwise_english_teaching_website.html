@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StepWise — Level Up Your English</title>
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --off-white: #F6F5F2;
+    --dark-green: #1A3A2A;
+    --near-black: #1C1C1C;
+    --lime: #C8F065;
+    --lavender: #C67CFF;
+    --sky: #C5DBFF;
+    --royal: #3B4EE8;
+    --white: #ffffff;
+    --font: 'Cabinet Grotesk', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--off-white);
+    color: var(--near-black);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(246,245,242,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo svg { width: 32px; height: 32px; }
+  .nav-logo img { height: 32px; width: auto; }
+  .nav-logo span { font-size: 20px; font-weight: 800; color: var(--near-black); letter-spacing: -0.5px; }
+  .nav-logo span em { font-style: normal; }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--near-black); opacity: 0.7; transition: opacity 0.2s; }
+  .nav-links a:hover { opacity: 1; }
+  .nav-cta {
+    background: var(--near-black); color: var(--off-white);
+    border: none; border-radius: 100px;
+    padding: 10px 24px; font-size: 14px; font-weight: 700;
+    cursor: pointer; font-family: var(--font);
+    transition: background 0.2s, transform 0.15s;
+    text-decoration: none; display: inline-block;
+  }
+  .nav-cta:hover { background: var(--dark-green); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+    padding: 120px 48px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--lime); color: var(--near-black);
+    border-radius: 100px; padding: 6px 16px;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
+    margin-bottom: 32px; text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(52px, 8vw, 110px);
+    font-weight: 900; line-height: 0.95;
+    letter-spacing: -3px; max-width: 900px;
+    margin-bottom: 32px;
+  }
+  .hero h1 span { color: var(--royal); }
+  .hero-sub {
+    font-size: 18px; font-weight: 400; color: rgba(28,28,28,0.65);
+    max-width: 480px; line-height: 1.6; margin-bottom: 48px;
+  }
+  .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--near-black); color: var(--off-white);
+    border-radius: 100px; padding: 16px 36px;
+    font-size: 16px; font-weight: 700; font-family: var(--font);
+    border: none; cursor: pointer; transition: all 0.2s; text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--royal); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent; color: var(--near-black);
+    border-radius: 100px; padding: 16px 36px;
+    font-size: 16px; font-weight: 700; font-family: var(--font);
+    border: 2px solid rgba(28,28,28,0.2); cursor: pointer;
+    transition: all 0.2s; text-decoration: none; display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--near-black); }
+
+  .hero-bg-stair {
+    position: absolute; right: -60px; bottom: -40px;
+    width: 55vw; max-width: 720px; opacity: 0.06;
+    pointer-events: none;
+  }
+
+  /* STATS */
+  .stats {
+    background: var(--near-black); color: var(--off-white);
+    padding: 64px 48px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+  }
+  .stat { padding: 32px; border-right: 1px solid rgba(255,255,255,0.1); }
+  .stat:last-child { border-right: none; }
+  .stat-number { font-size: 54px; font-weight: 900; letter-spacing: -2px; line-height: 1; }
+  .stat-number.lime { color: var(--lime); }
+  .stat-number.lavender { color: var(--lavender); }
+  .stat-number.sky { color: var(--sky); }
+  .stat-number.royal { color: #7B8FFF; }
+  .stat-label { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.55); margin-top: 8px; }
+
+  /* HOW IT WORKS */
+  .section { padding: 96px 48px; }
+  .section-tag {
+    font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(28,28,28,0.45); margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: clamp(36px, 5vw, 64px); font-weight: 900;
+    letter-spacing: -2px; line-height: 1.05; max-width: 700px;
+    margin-bottom: 64px;
+  }
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  }
+  .step-card {
+    background: var(--white); padding: 48px 40px;
+    position: relative; overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: transform 0.2s;
+  }
+  .step-card:hover { transform: translateY(-4px); }
+  .step-num {
+    font-size: 80px; font-weight: 900; line-height: 1;
+    letter-spacing: -4px; color: rgba(28,28,28,0.08);
+    margin-bottom: 24px;
+  }
+  .step-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 20px;
+  }
+  .step-icon.green { background: var(--lime); }
+  .step-icon.purple { background: var(--lavender); }
+  .step-icon.blue { background: var(--sky); }
+  .step-card h3 { font-size: 22px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.5px; }
+  .step-card p { font-size: 15px; color: rgba(28,28,28,0.6); line-height: 1.65; }
+
+  /* OFFERINGS */
+  .offerings { background: var(--dark-green); padding: 96px 48px; }
+  .offerings .section-tag { color: rgba(246,245,242,0.4); }
+  .offerings .section-title { color: var(--off-white); }
+  .offerings-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .offer-card {
+    border-radius: 24px; padding: 40px 36px;
+    position: relative; overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .offer-card:hover { transform: translateY(-4px); }
+  .offer-card.lime { background: var(--lime); color: var(--near-black); }
+  .offer-card.lavender { background: var(--lavender); color: var(--near-black); }
+  .offer-card.royal { background: var(--royal); color: var(--off-white); }
+  .offer-level {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    opacity: 0.55; margin-bottom: 12px;
+  }
+  .offer-card h3 { font-size: 28px; font-weight: 900; letter-spacing: -1px; margin-bottom: 16px; }
+  .offer-card p { font-size: 14px; line-height: 1.7; opacity: 0.75; margin-bottom: 28px; }
+  .offer-features { list-style: none; }
+  .offer-features li {
+    font-size: 14px; font-weight: 500;
+    padding: 8px 0; border-top: 1px solid rgba(0,0,0,0.1);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .offer-card.royal .offer-features li { border-top-color: rgba(255,255,255,0.15); }
+  .check { font-size: 12px; opacity: 0.6; }
+
+  /* BOOKING */
+  .booking { padding: 96px 48px; background: var(--off-white); }
+  .booking-inner {
+    background: var(--near-black);
+    border-radius: 32px; overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1fr;
+  }
+  .booking-left { padding: 72px 64px; color: var(--off-white); }
+  .booking-left .section-tag { color: rgba(246,245,242,0.35); }
+  .booking-left .section-title { color: var(--off-white); margin-bottom: 24px; font-size: clamp(32px, 4vw, 52px); }
+  .booking-left p { color: rgba(246,245,242,0.6); font-size: 16px; line-height: 1.7; margin-bottom: 40px; }
+  .booking-perks { display: flex; flex-direction: column; gap: 16px; }
+  .perk { display: flex; align-items: center; gap: 14px; }
+  .perk-dot {
+    width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .perk-dot.l { background: var(--lime); }
+  .perk-dot.v { background: var(--lavender); }
+  .perk-dot.s { background: var(--sky); }
+  .perk span { font-size: 15px; font-weight: 500; color: rgba(246,245,242,0.85); }
+
+  /* FORM */
+  .booking-right {
+    background: var(--off-white); padding: 72px 64px;
+  }
+  .form-title { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+  .form-sub { font-size: 14px; color: rgba(28,28,28,0.55); margin-bottom: 36px; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label {
+    display: block; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.5px; text-transform: uppercase;
+    color: rgba(28,28,28,0.5); margin-bottom: 8px;
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 14px 16px;
+    background: var(--white); border: 1.5px solid #1c1c1c1f;
+    border-radius: 12px; font-family: var(--font); font-size: 15px;
+    color: var(--near-black); outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--royal);
+  }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .submit-btn {
+    width: 100%; background: var(--near-black); color: var(--off-white);
+    border: none; border-radius: 100px; padding: 16px;
+    font-size: 16px; font-weight: 800; font-family: var(--font);
+    cursor: pointer; transition: all 0.2s; margin-top: 8px;
+  }
+  .submit-btn:hover { background: var(--royal); transform: translateY(-1px); }
+  .form-note { text-align: center; font-size: 12px; color: rgba(28,28,28,0.4); margin-top: 12px; }
+
+  /* SUCCESS */
+  .success-msg {
+    display: none; text-align: center; padding: 40px;
+  }
+  .success-msg.show { display: block; }
+  .success-icon {
+    width: 64px; height: 64px; border-radius: 50%; background: var(--lime);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; margin: 0 auto 20px;
+  }
+  .success-msg h3 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+  .success-msg p { color: rgba(28,28,28,0.6); font-size: 15px; line-height: 1.6; }
+
+  /* TESTIMONIALS */
+  .testimonials { padding: 96px 48px; background: var(--white); }
+  .testimonials .section-title { margin-bottom: 48px; }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .testi-card {
+    background: var(--off-white); border-radius: 20px; padding: 32px;
+    position: relative;
+  }
+  .testi-quote {
+    font-size: 40px; line-height: 1; font-weight: 900;
+    color: var(--royal); margin-bottom: 16px;
+  }
+  .testi-text { font-size: 15px; line-height: 1.7; color: rgba(28,28,28,0.75); margin-bottom: 24px; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: var(--near-black);
+  }
+  .testi-name { font-size: 14px; font-weight: 700; }
+  .testi-meta { font-size: 12px; color: rgba(28,28,28,0.45); }
+
+  /* FOOTER */
+  footer {
+    background: var(--near-black); color: var(--off-white);
+    padding: 64px 48px 40px;
+  }
+  .footer-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 48px;
+  }
+  .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .footer-logo svg { width: 28px; height: 28px; }
+  .footer-logo span { font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+  .footer-tagline { font-size: 14px; color: rgba(246,245,242,0.4); max-width: 240px; line-height: 1.6; }
+  .footer-links { display: flex; gap: 64px; }
+  .footer-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(246,245,242,0.35); margin-bottom: 16px; }
+  .footer-col a { display: block; font-size: 14px; font-weight: 500; color: rgba(246,245,242,0.7); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--off-white); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-bottom p { font-size: 13px; color: rgba(246,245,242,0.3); }
+  .footer-badge { background: var(--lime); color: var(--near-black); border-radius: 100px; padding: 6px 16px; font-size: 12px; font-weight: 700; }
+
+  /* LOGO ICON SVG */
+  .stair-icon { display: inline-block; }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 64px; }
+    .hero h1 { font-size: 48px; letter-spacing: -2px; }
+    .stats { grid-template-columns: 1fr 1fr; padding: 48px 24px; }
+    .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .section, .offerings, .booking, .testimonials { padding: 64px 24px; }
+    .steps-grid, .offerings-grid, .testi-grid { grid-template-columns: 1fr; }
+    .booking-inner { grid-template-columns: 1fr; }
+    .booking-left { padding: 48px 32px; }
+    .booking-right { padding: 48px 32px; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-top { flex-direction: column; gap: 40px; }
+    .footer-links { flex-direction: column; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="C:\Users\noure\Downloads\STEPWISE\logo-trans.png"
+    </a>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#lessons">Lessons</a>
+    <a href="#testimonials">Reviews</a>
+  </div>
+  <a href="#book" class="nav-cta">Book a session</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <img src="C:\Users\noure\Downloads\STEPWISE\sym-trans.png" width="20" alt="StepWise logo">
+    English lessons that move with you
+</div>
+<h1>Level up your<br><span>English,</span><br>one step at a time.</h1>
+<p class="hero-sub">StepWise makes English learning structured, personal, and genuinely effective. From beginner to fluent — we walk every step with you.</p>
+<div class="hero-actions">
+    <a href="#book" class="btn-primary">Book your free intro →</a>
+    <a href="#how" class="btn-ghost">See how it works</a>
+</div>
+
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-number lime">2,400+</div><div class="stat-label">Students taught worldwide</div></div>
+  <div class="stat"><div class="stat-number lavender">98%</div><div class="stat-label">Satisfaction rate</div></div>
+  <div class="stat"><div class="stat-number sky">6</div><div class="stat-label">Proficiency levels covered</div></div>
+  <div class="stat"><div class="stat-number royal">1:1</div><div class="stat-label">Personalised sessions</div></div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <p class="section-tag">The method</p>
+  <h2 class="section-title">Three steps to fluency</h2>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-icon green">📋</div>
+      <h3>Assess your level</h3>
+      <p>We begin with a friendly, 30-minute intake session to understand your goals, current level, and learning style. No pressure, just a conversation.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-icon purple">🎯</div>
+      <h3>Get your plan</h3>
+      <p>Your teacher builds a personalised learning path — covering speaking, writing, grammar, and vocabulary — tuned exactly to where you want to go.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-icon blue">🚀</div>
+      <h3>Climb, step by step</h3>
+      <p>Book live sessions, track your progress, and reach new milestones at your own pace. Every lesson brings you one step closer to confidence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERINGS -->
+<section class="offerings" id="lessons">
+  <p class="section-tag">What we offer</p>
+  <h2 class="section-title">Pick your path</h2>
+  <div class="offerings-grid">
+    <div class="offer-card lime">
+      <p class="offer-level">Foundation</p>
+      <h3>General English</h3>
+      <p>Build a solid everyday English foundation — reading, speaking, and writing for real life situations.</p>
+      <ul class="offer-features">
+        <li><span class="check">→</span> All levels A1–C2</li>
+        <li><span class="check">→</span> 1-on-1 or small group</li>
+        <li><span class="check">→</span> Flexible scheduling</li>
+        <li><span class="check">→</span> Progress tracking</li>
+      </ul>
+    </div>
+    <div class="offer-card lavender">
+      <p class="offer-level">Career</p>
+      <h3>Business English</h3>
+      <p>Master professional communication — emails, presentations, negotiations, and interviews in English.</p>
+      <ul class="offer-features">
+        <li><span class="check">→</span> Industry-specific vocab</li>
+        <li><span class="check">→</span> Mock interviews</li>
+        <li><span class="check">→</span> Writing workshops</li>
+        <li><span class="check">→</span> Certification prep</li>
+      </ul>
+    </div>
+    <div class="offer-card royal">
+      <p class="offer-level">Exam</p>
+      <h3>IELTS / TOEFL Prep</h3>
+      <p>Score-focused preparation with expert teachers who know exactly what examiners are looking for.</p>
+      <ul class="offer-features">
+        <li><span class="check">→</span> Practice tests included</li>
+        <li><span class="check">→</span> Speaking & writing drills</li>
+        <li><span class="check">→</span> Score prediction</li>
+        <li><span class="check">→</span> 30-day sprint option</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <p class="section-tag">Student stories</p>
+  <h2 class="section-title">What our students say</h2>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">I went from barely holding a conversation to landing a job at an international company in 6 months. StepWise literally changed my career.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background: var(--lime);">SA</div>
+        <div><div class="testi-name">Sara A.</div><div class="testi-meta">Business English student</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">My IELTS score jumped from 5.5 to 7.5 in two months. The structured approach and mock tests made all the difference.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background: var(--lavender);">KM</div>
+        <div><div class="testi-name">Karim M.</div><div class="testi-meta">IELTS prep student</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <p class="testi-text">The teachers here actually listen. Every session feels tailored to exactly what I need that week. Progress is visible and motivating.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background: var(--sky);">LB</div>
+        <div><div class="testi-name">Léa B.</div><div class="testi-meta">General English student</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="book">
+  <div class="booking-inner">
+    <div class="booking-left">
+      <p class="section-tag">Start today</p>
+      <h2 class="section-title">Book your free intro session</h2>
+      <p>No commitment. No payment upfront. Just a 30-minute call to meet your teacher, assess your level, and build a plan that works for your life.</p>
+      <div class="booking-perks">
+        <div class="perk"><div class="perk-dot l">✓</div><span>Level assessment included</span></div>
+        <div class="perk"><div class="perk-dot v">✓</div><span>Meet your teacher before committing</span></div>
+        <div class="perk"><div class="perk-dot s">✓</div><span>Custom plan ready in 24 hours</span></div>
+      </div>
+    </div>
+    <div class="booking-right">
+      <div id="booking-form-wrap">
+        <h3 class="form-title">Reserve your spot</h3>
+        <p class="form-sub"></p>
+        <form id="booking-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First name</label>
+              <input type="text" placeholder="name" required>
+            </div>
+            <div class="form-group">
+              <label>Last name</label>
+              <input type="text" placeholder="name" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email adress</label>
+            <input type="email" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <label>Phone number</label>
+            <input type="tel" placeholder="Phone number">
+          </div>
+          <div class="form-group">
+            <label>Choose a programme</label>
+            <select required>
+              <option value="" disabled selected>Programme…</option>
+              <option>General English</option>
+              <option>Business English</option>
+              <option>IELTS / TOEFL Preparation</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Estimate your level</label>
+            <select>
+              <option value="" disabled selected>Your level…</option>
+              <option>Beginner (A1–A2)</option>
+              <option>Intermediate (B1–B2)</option>
+              <option>Advanced (C1–C2)</option>
+              <option>Not sure</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label></label>
+            <textarea placeholder="Goals, schedule preferences, questions… Anything else?"></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Book my free session →</button>
+          <p class="form-note">🔒 Your information is private and never shared.</p>
+        </form>
+      </div>
+      <div class="success-msg" id="success-msg">
+        <div class="success-icon">✓</div>
+        <h3>You're booked in!</h3>
+        <p>We've received your request and will be in touch within 2 hours to confirm your free intro session. Check your inbox!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <svg viewBox="0 0 32 32" fill="none">
+          <rect x="2" y="18" width="18" height="6" rx="1" fill="#F6F5F2"/>
+          <rect x="7" y="11" width="16" height="6" rx="1" fill="#F6F5F2"/>
+          <rect x="13" y="4" width="14" height="6" rx="1" fill="#F6F5F2"/>
+        </svg>
+        <span>StepWise</span>
+      </div>
+      <p class="footer-tagline">Structured English learning for real life. One step at a time.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="#lessons">General English</a>
+        <a href="#lessons">Business English</a>
+        <a href="#lessons">IELTS / TOEFL</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About us</a>
+        <a href="#">Our teachers</a>
+        <a href="#">Blog</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:hello@stepwise.com">hello@stepwise.com</a>
+        <a href="#">WhatsApp us</a>
+        <a href="#book">Book a session</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 StepWise. All rights reserved.</p>
+    <div class="footer-badge">Free intro available</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('booking-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('booking-form-wrap').style.display = 'none';
+    document.getElementById('success-msg').classList.add('show');
+  });
+</script>
+</body>
+</html>

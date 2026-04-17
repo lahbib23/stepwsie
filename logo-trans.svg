@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 478.28 90.59">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-width: 0px;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #231f20;
+      }
+
+      .cls-2 {
+        font-family: CabinetGrotesk-Extrabold, 'Cabinet Grotesk';
+        font-size: 83.26px;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <text class="cls-2" transform="translate(119.51 69.52)"><tspan x="0" y="0">StepWise</tspan></text>
+  <g>
+    <path class="cls-1" d="M91.46,45.58c-24.64-3.53-49.28,10.46-73.92,8.57,0-5.65,0-11.91,0-18.79,24.64,1.9,49.28-12.1,73.92-8.57,0,5.7,0,11.97,0,18.79Z"/>
+    <path class="cls-1" d="M66.61,70.98c-22.2,0-44.41,0-66.61,0C0,64.71,0,58.45,0,52.18c22.2,9.56,44.41.99,66.61-2.79,0,6.78,0,13.98,0,21.58Z"/>
+    <path class="cls-1" d="M105.39,28.36c-22.2-9.56-44.41-.99-66.61,2.79V9.56c22.2,0,44.41,0,66.61,0,0,6.26,0,12.53,0,18.79Z"/>
+  </g>
+</svg>
